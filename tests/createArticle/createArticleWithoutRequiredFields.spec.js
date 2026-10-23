@@ -4,8 +4,8 @@ import { HomePage } from '../../src/pages/HomePage';
 import { CreateArticlePage } from '../../src/pages/CreateArticlePage';
 import { faker } from '@faker-js/faker';
 
-let homePage;
-let createArticlePage;
+export let homePage;
+export let createArticlePage;
 
 test.beforeEach(async ({ page }) => {
   const signUpPage = new SignUpPage(page);
@@ -13,7 +13,7 @@ test.beforeEach(async ({ page }) => {
   createArticlePage = new CreateArticlePage(page);
 
   const user = {
-    username: `${faker.person.firstName()}_${faker.person.lastName()}`,
+    username: `${faker.person.firstName()}${faker.number.int(99999)}`,
     email: faker.internet.email(),
     password: faker.internet.password(),
   };
@@ -26,9 +26,8 @@ test.beforeEach(async ({ page }) => {
   await homePage.assertYourFeedTabIsVisible();
 });
 
-test('Creat an article without required fields', async () => {
+test('Create an article without required fields', async () => {
   await homePage.clickNewArticleLink();
-
   await createArticlePage.clickPublishArticleButton();
   await createArticlePage.assertErrorMessageContainsText(
     'Article title cannot be empty',
