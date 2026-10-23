@@ -4,8 +4,8 @@ import { HomePage } from '../../src/pages/HomePage';
 import { CreateArticlePage } from '../../src/pages/CreateArticlePage';
 import { faker } from '@faker-js/faker';
 
-export let homePage;
-export let createArticlePage;
+let homePage;
+let createArticlePage;
 
 test.beforeEach(async ({ page }) => {
   const signUpPage = new SignUpPage(page);

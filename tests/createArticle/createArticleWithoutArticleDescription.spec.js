@@ -6,6 +6,7 @@ import { faker } from '@faker-js/faker';
 
 let homePage;
 let createArticlePage;
+let article;
 
 test.beforeEach(async ({ page }) => {
   const signUpPage = new SignUpPage(page);
@@ -18,6 +19,14 @@ const user = {
     password: faker.internet.password(),
   };
 
+article = { 
+    title: faker.lorem.words(3),
+    description: faker.lorem.sentence(),
+    body: faker.lorem.paragraphs(2),
+    tags: [faker.lorem.word(), faker.lorem.word()],
+  };
+
+
   await signUpPage.open();
   await signUpPage.fillUsernameField(user.username);
   await signUpPage.fillEmailField(user.email);
@@ -26,13 +35,6 @@ const user = {
   await homePage.assertYourFeedTabIsVisible();
   await homePage.clickNewArticleLink();
 });
-
-const article = {
-    title: faker.lorem.words(3),
-    description: faker.lorem.sentence(),
-    body: faker.lorem.paragraphs(2),
-    tags: [faker.lorem.word(), faker.lorem.word()],
-  };
 
 test('Create an article without description', async () => {
   await createArticlePage.fillArticleTitle(article.title);
@@ -43,4 +45,4 @@ test('Create an article without description', async () => {
   await createArticlePage.assertErrorMessageContainsText(
     'Article description cannot be empty',
   );
-});
+})

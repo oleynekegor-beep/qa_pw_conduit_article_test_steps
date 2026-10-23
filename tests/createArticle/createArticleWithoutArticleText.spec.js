@@ -5,6 +5,7 @@ import { CreateArticlePage } from '../../src/pages/CreateArticlePage';
 import { faker } from '@faker-js/faker';
 
 let homePage;
+let article;
 let createArticlePage;
 
 test.beforeEach(async ({ page }) => {
@@ -18,6 +19,12 @@ const user = {
     password: faker.internet.password(),
   };
 
+  article = {
+    title: faker.lorem.words(3),
+    description: faker.lorem.sentence(),
+    body: faker.lorem.paragraphs(2),
+    tags: [faker.lorem.word(), faker.lorem.word()],
+  };
 
   await signUpPage.open();
   await signUpPage.fillUsernameField(user.username);
@@ -28,12 +35,7 @@ const user = {
   await homePage.clickNewArticleLink();
 });
 
-const article = {
-    title: faker.lorem.words(3),
-    description: faker.lorem.sentence(),
-    body: faker.lorem.paragraphs(2),
-    tags: [faker.lorem.word(), faker.lorem.word()],
-  };
+
 
 test('Create an article without required fields', async () => {
   await createArticlePage.fillArticleTitle(article.title);

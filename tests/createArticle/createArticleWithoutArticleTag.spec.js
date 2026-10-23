@@ -8,6 +8,7 @@ import { ArticlePage } from '../../src/pages/ArticlePage';
 let homePage; 
 let createArticlePage;
 let articlePage;
+let article;
 
 test.beforeEach(async ({ page }) => {
   const signUpPage = new SignUpPage(page);
@@ -30,7 +31,7 @@ const user = {
   await homePage.clickNewArticleLink();
 });
 
-const article = {
+article = {
     title: faker.lorem.words(3),
     description: faker.lorem.sentence(),
     body: faker.lorem.paragraphs(2),

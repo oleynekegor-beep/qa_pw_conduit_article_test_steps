@@ -8,6 +8,7 @@ import { ArticlePage } from '../../src/pages/ArticlePage';
 let homePage; 
 let createArticlePage;
 let articlePage;
+let article;
 
 test.beforeEach(async ({ page }) => {
   const signUpPage = new SignUpPage(page);
@@ -21,6 +22,13 @@ test.beforeEach(async ({ page }) => {
     password: faker.internet.password(),
   };
 
+  article = {
+    title: faker.lorem.words(3),
+    description: faker.lorem.sentence(),
+    body: faker.lorem.paragraphs(2),
+    tags: [faker.lorem.word(), faker.lorem.word()],
+  };
+
   await signUpPage.open();
   await signUpPage.fillUsernameField(user.username);
   await signUpPage.fillEmailField(user.email);
@@ -29,13 +37,6 @@ test.beforeEach(async ({ page }) => {
   await homePage.assertYourFeedTabIsVisible(); 
   await homePage.clickNewArticleLink();
 });
-
-  const article = {
-    title: faker.lorem.words(3),
-    description: faker.lorem.sentence(),
-    body: faker.lorem.paragraphs(2),
-    tags: [faker.lorem.word(), faker.lorem.word()],
-  };
 
 test('Create an article with required and optional fields', async () => {
   await createArticlePage.fillArticleTitle(article.title);
