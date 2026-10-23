@@ -8,8 +8,12 @@ export class CreateArticlePage {
     });
     this.errorMessage = page.getByRole('list').nth(1);
     this.articleTitleField = page.getByPlaceholder('Article Title');
-    this.articleDescriptionField = page.getByPlaceholder("What's this article about?");
-    this.articleBodyField = page.getByPlaceholder('Write your article (in markdown)');
+    this.articleDescriptionField = page.getByPlaceholder(
+      "What's this article about?"
+    );
+    this.articleBodyField = page.getByPlaceholder(
+      'Write your article (in markdown)'
+    );
     this.articleTagsField = page.getByPlaceholder('Enter tags');
     this.articleTitle = page.getByRole('heading', { level: 1 });
   }
@@ -50,6 +54,6 @@ export class CreateArticlePage {
       await this.articleTagsField.fill(tag);
       await this.page.keyboard.press('Enter');
     }
-  });
-}
+    });
+  }
 }
