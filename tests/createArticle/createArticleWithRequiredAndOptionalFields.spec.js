@@ -5,7 +5,7 @@ import { CreateArticlePage } from '../../src/pages/CreateArticlePage';
 import { faker } from '@faker-js/faker';
 import { ArticlePage } from '../../src/pages/ArticlePage';
 
-let homePage; 
+let homePage;
 let createArticlePage;
 let articlePage;
 let article;
@@ -34,7 +34,7 @@ test.beforeEach(async ({ page }) => {
   await signUpPage.fillEmailField(user.email);
   await signUpPage.fillPasswordField(user.password);
   await signUpPage.clickSignUpButton();
-  await homePage.assertYourFeedTabIsVisible(); 
+  await homePage.assertYourFeedTabIsVisible();
   await homePage.clickNewArticleLink();
 });
 

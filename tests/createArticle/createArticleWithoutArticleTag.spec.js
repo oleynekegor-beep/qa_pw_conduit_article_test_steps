@@ -5,7 +5,7 @@ import { CreateArticlePage } from '../../src/pages/CreateArticlePage';
 import { faker } from '@faker-js/faker';
 import { ArticlePage } from '../../src/pages/ArticlePage';
 
-let homePage; 
+let homePage;
 let createArticlePage;
 let articlePage;
 let article;
@@ -16,10 +16,17 @@ test.beforeEach(async ({ page }) => {
   createArticlePage = new CreateArticlePage(page);
   articlePage = new ArticlePage(page);
 
-const user = {
+  const user = {
     username: `${faker.person.firstName()}${faker.number.int(99999)}`,
     email: faker.internet.email(),
     password: faker.internet.password(),
+  };
+
+  article = {
+    title: faker.lorem.words(3),
+    description: faker.lorem.sentence(),
+    body: faker.lorem.paragraphs(2),
+    tags: [faker.lorem.word(), faker.lorem.word()],
   };
 
   await signUpPage.open();
@@ -31,18 +38,10 @@ const user = {
   await homePage.clickNewArticleLink();
 });
 
-article = {
-    title: faker.lorem.words(3),
-    description: faker.lorem.sentence(),
-    body: faker.lorem.paragraphs(2),
-    tags: [faker.lorem.word(), faker.lorem.word()],
-  };
-
-test('Create an article without article tags', async () => {
+test('Create an article without article tag', async () => {
   await createArticlePage.fillArticleTitle(article.title);
   await createArticlePage.fillArticleDescription(article.description);
   await createArticlePage.fillArticleBody(article.body);
-  await createArticlePage.fillArticleTags([]);
   await createArticlePage.clickPublishArticleButton();
   await articlePage.assertArticleTitleIsVisible(article.title);
 });

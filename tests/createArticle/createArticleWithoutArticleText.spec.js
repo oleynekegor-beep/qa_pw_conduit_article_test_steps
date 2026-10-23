@@ -5,15 +5,15 @@ import { CreateArticlePage } from '../../src/pages/CreateArticlePage';
 import { faker } from '@faker-js/faker';
 
 let homePage;
-let article;
 let createArticlePage;
+let article;
 
 test.beforeEach(async ({ page }) => {
   const signUpPage = new SignUpPage(page);
   homePage = new HomePage(page);
   createArticlePage = new CreateArticlePage(page);
 
-const user = {
+  const user = {
     username: `${faker.person.firstName()}${faker.number.int(99999)}`,
     email: faker.internet.email(),
     password: faker.internet.password(),
@@ -35,9 +35,7 @@ const user = {
   await homePage.clickNewArticleLink();
 });
 
-
-
-test('Create an article without required fields', async () => {
+test('Create an article without article text', async () => {
   await createArticlePage.fillArticleTitle(article.title);
   await createArticlePage.fillArticleDescription(article.description);
   await createArticlePage.fillArticleBody('');

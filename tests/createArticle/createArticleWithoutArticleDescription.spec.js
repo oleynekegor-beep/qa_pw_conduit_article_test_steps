@@ -13,19 +13,18 @@ test.beforeEach(async ({ page }) => {
   homePage = new HomePage(page);
   createArticlePage = new CreateArticlePage(page);
 
-const user = {
+  const user = {
     username: `${faker.person.firstName()}${faker.number.int(99999)}`,
     email: faker.internet.email(),
     password: faker.internet.password(),
   };
 
-article = { 
+  article = {
     title: faker.lorem.words(3),
     description: faker.lorem.sentence(),
     body: faker.lorem.paragraphs(2),
     tags: [faker.lorem.word(), faker.lorem.word()],
   };
-
 
   await signUpPage.open();
   await signUpPage.fillUsernameField(user.username);
@@ -36,7 +35,7 @@ article = {
   await homePage.clickNewArticleLink();
 });
 
-test('Create an article without description', async () => {
+test('Create an article without article description', async () => {
   await createArticlePage.fillArticleTitle(article.title);
   await createArticlePage.fillArticleDescription('');
   await createArticlePage.fillArticleBody(article.body);
@@ -45,4 +44,4 @@ test('Create an article without description', async () => {
   await createArticlePage.assertErrorMessageContainsText(
     'Article description cannot be empty',
   );
-})
+});

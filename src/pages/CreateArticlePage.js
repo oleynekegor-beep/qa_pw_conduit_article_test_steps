@@ -50,6 +50,4 @@ export class CreateArticlePage {
       await this.articleTagsField.fill(tag);
       await this.page.keyboard.press('Enter');
     }
-  });
-}
-}
+  })}}
